@@ -499,7 +499,7 @@ module RubyDanfe
         chave = det.css('chave').text
         unless chave.empty?
           x, y = 0.25, y + 0.25 if x == 20.75
-          @pdf.ibox 5.52, 1.50, x, y, '', 'NFe', { :size => 7, :border => 0, :style => :bold }
+          @pdf.ibox 5.52, 1.50, x, y, '', tipo_documento, { :size => 7, :border => 0, :style => :bold }
           x = x + 1.75
           @pdf.ibox 5.52, 5.25, x, y, '', chave, { :size => 6, :border => 0, :style => :bold }
           x = x + 5.50
@@ -535,5 +535,13 @@ module RubyDanfe
       @pdf.ibox 0.40, 5.00, 15.74, 27.75, '', 'RESERVADO AO FISCO', { :align => :center, :size => 7 }
       @pdf.ibox 1.20, 5.00, 15.74, 28.15, '', '', { :align => :center, :size => 6 }
     end
+
+    def tipo_documento
+      case @xml['ide/tpCTe']
+        when '0' then 'NF-e'
+        else 'CT-e'
+      end
+    end
+
   end
 end
