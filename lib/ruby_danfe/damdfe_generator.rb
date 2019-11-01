@@ -8,6 +8,7 @@ module RubyDanfe
 
     def generatePDF
       render_cabecalho
+      render_qrcode
       render_titulo
       render_barcode_box
       render_infobox
@@ -98,6 +99,10 @@ module RubyDanfe
 
     def render_footer
       @pdf.ibox 0.5, 5, 0.5, 29.25, '', "DATA E HORA DA IMPRESSÃO: " + Helper.format_datetime(DateTime.now.to_s), { :size => 6, :align => :left, :border => 0 }
+    end
+
+    def render_qrcode
+      @pdf.iqrcode(2.50, 5.00, @xml['infMDFeSupl/qrCodMDFe'], 6)     
     end
   end
 end

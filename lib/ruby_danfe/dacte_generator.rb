@@ -536,7 +536,6 @@ module RubyDanfe
 
     def render_qrcode
       @pdf.iqrcode(14.50, 23.00, @xml['infCTeSupl/qrCodCTe'], 6)     
-      
     end
 
     def tipo_documento
