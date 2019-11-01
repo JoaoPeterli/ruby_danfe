@@ -33,7 +33,7 @@ module RubyDanfe
     end
 
     def iqrcode(x, y, info, size = nil)
-      Barby::QrCode.new(info, :level => :q, :size => size).annotate_pdf(self, :x => x.cm, :y => Helper.invert(y.cm)) if info != ''
+      Barby::QrCode.new(info, :level => :l, :size => 15).annotate_pdf(self, :x => x.cm, :y => Helper.invert(y.cm)) if info != ''
     end
 
     def irectangle(h, w, x, y)

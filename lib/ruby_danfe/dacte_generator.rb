@@ -25,6 +25,7 @@ module RubyDanfe
         render_valor_da_prestacao
         render_impostos
         render_documentos_originarios
+        render_qrcode
         render_observacoes
         render_modal
       end
@@ -471,15 +472,12 @@ module RubyDanfe
 
     def render_documentos_originarios
       #documentos originários
-      @pdf.ibox 0.40, 20.49, 0.25, 18.73, '', 'DOCUMENTOS ORIGINÁRIOS', { :align => :left, :size => 7, :style => :bold, :border => 0 }
+      @pdf.ibox 0.40, 10.25, 0.25, 18.73, '', 'DOCUMENTOS ORIGINÁRIOS', { :align => :left, :size => 7, :style => :bold, :border => 0 }
       @pdf.ibox 5.52, 1.75, 0.25, 19.13, 'TP DOC.', '', { :size => 7}
       @pdf.ibox 5.52, 5.50, 2.00, 19.13, 'CNPJ/CPF EMITENTE/CHAVE', '', { :size => 7}
       @pdf.ibox 5.52, 1.00, 7.50, 19.13, 'SÉRIE', '', { :size => 7}
       @pdf.ibox 5.52, 2.00, 8.50, 19.13, 'Nº DOCUMENTO', '', { :size => 7}
-      @pdf.ibox 5.52, 1.75, 10.50, 19.13, 'TP DOC.', '', { :size => 7}
-      @pdf.ibox 5.52, 5.50, 12.25, 19.13, 'CNPJ/CPF EMITENTE/CHAVE', '', { :size => 7}
-      @pdf.ibox 5.52, 1.00, 17.75, 19.13, 'SÉRIE', '', { :size => 7}
-      @pdf.ibox 5.52, 2.00, 18.74, 19.13, 'Nº DOCUMENTO', '', { :size => 7}
+    
       x = 0.25
       y = 19.43
       @xml.collect('xmlns', 'infNF') { |det|
@@ -534,6 +532,11 @@ module RubyDanfe
       @pdf.ibox 1.20, 15.49, 0.25, 28.15, '', '', { :align => :center, :size => 6 }
       @pdf.ibox 0.40, 5.00, 15.74, 27.75, '', 'RESERVADO AO FISCO', { :align => :center, :size => 7 }
       @pdf.ibox 1.20, 5.00, 15.74, 28.15, '', '', { :align => :center, :size => 6 }
+    end
+
+    def render_qrcode
+      @pdf.iqrcode(14.50, 23.00, @xml['infCTeSupl/qrCodCTe'], 6)     
+      
     end
 
     def tipo_documento
